@@ -1,5 +1,7 @@
 package com.example.festivalapp;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 
 /**
@@ -23,6 +26,18 @@ public class MusicFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_music, container, false);
-    }
+
+        View v = inflater.inflate(R.layout.fragment_music, container, false);
+        ImageView imageView = v.findViewById(R.id.spotify);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                Uri uri = Uri.parse("https://open.spotify.com/playlist/0KDwAB1j12Jzr2qEXdfDq0?si=60TW8TaOQJmQUdNaogmtzA");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            }
+        });
+        return v;
+    };
+
 }
