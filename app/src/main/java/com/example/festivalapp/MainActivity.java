@@ -4,8 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -50,4 +53,16 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
             };
+
+    public void openBrowser(View view){
+        String url = "google.com";
+
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.addCategory(Intent.CATEGORY_BROWSABLE);
+
+        intent.setData(Uri.parse(url));
+
+        startActivity(intent);
+    }
 }
