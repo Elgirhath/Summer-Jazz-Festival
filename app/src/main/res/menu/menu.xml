@@ -3,7 +3,7 @@
     <item
         android:id="@+id/nav_map"
         android:icon="@drawable/ic_navigation_white_24dp"
-        android:title="Map" />
+        android:title="Gdzie gramy?" />
     <item
         android:id="@+id/nav_program"
         android:icon="@drawable/ic_format_list_bulleted_black_24dp"
@@ -11,10 +11,10 @@
     <item
         android:id="@+id/nav_music"
         android:icon="@drawable/ic_music_note_black_24dp"
-        android:title="Music" />
+        android:title="Playlista" />
     <item
         android:id="@+id/nav_info"
         android:icon="@drawable/ic_info_outline_black_24dp"
-        android:title="Info" />
+        android:title="Pytanie" />
 
 </menu>
