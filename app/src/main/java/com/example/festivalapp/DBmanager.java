@@ -28,16 +28,19 @@ public class DBmanager {
         dbHelper.close();
     }
 
-    public void insert(String name, String desc) {
+    public void insert(String artist, String date, String hour, String place, String link) {
         ContentValues contentValue = new ContentValues();
-        contentValue.put(DataBaseHelper.SUBJECT, name);
-        contentValue.put(DataBaseHelper.DESC, desc);
-        database.insert(DataBaseHelper.TABLE_NAME, null, contentValue);
+        contentValue.put(DataBaseHelper.ARTIST, artist);
+        contentValue.put(DataBaseHelper.DATE, date);
+        contentValue.put(DataBaseHelper.HOUR, hour);
+        contentValue.put(DataBaseHelper.PLACE, place);
+        contentValue.put(DataBaseHelper.LINK, link);
+        database.insert(DataBaseHelper.PROGRAM, null, contentValue);
     }
 
     public Cursor fetch() {
-        String[] columns = new String[] { DataBaseHelper._ID, DataBaseHelper.SUBJECT, DataBaseHelper.DESC };
-        Cursor cursor = database.query(DataBaseHelper.TABLE_NAME, columns, null, null, null, null, null);
+        String[] columns = new String[] { DataBaseHelper._ID, DataBaseHelper.ARTIST, DataBaseHelper.DATE, DataBaseHelper.HOUR, DataBaseHelper.PLACE, DataBaseHelper.LINK};
+        Cursor cursor = database.query(DataBaseHelper.PROGRAM, columns, null, null, null, null, null);
         if (cursor != null) {
             cursor.moveToFirst();
         }
@@ -46,14 +49,14 @@ public class DBmanager {
 
     public int update(long _id, String name, String desc) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put(DataBaseHelper.SUBJECT, name);
-        contentValues.put(DataBaseHelper.DESC, desc);
-        int i = database.update(DataBaseHelper.TABLE_NAME, contentValues, DataBaseHelper._ID + " = " + _id, null);
+        contentValues.put(DataBaseHelper.ARTIST, name);
+        contentValues.put(DataBaseHelper.DATE, desc);
+        int i = database.update(DataBaseHelper.PROGRAM, contentValues, DataBaseHelper._ID + " = " + _id, null);
         return i;
     }
 
     public void delete(long _id) {
-        database.delete(DataBaseHelper.TABLE_NAME, DataBaseHelper._ID + "=" + _id, null);
+        database.delete(DataBaseHelper.PROGRAM, DataBaseHelper._ID + "=" + _id, null);
     }
 
 }
