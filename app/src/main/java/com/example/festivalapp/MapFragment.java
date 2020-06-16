@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -38,9 +39,15 @@ public class MapFragment extends Fragment {
 
         ListView list = v.findViewById(R.id.list);
 
+
         lAdapter = new ListAdapter(getActivity(), version, versionNumber, images);
 
         list.setAdapter(lAdapter);
+
+        TextView textView = new TextView(getActivity());
+        textView.setText("Gdzie gramy?");
+
+        //list.addHeaderView(textView);
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
