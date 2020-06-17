@@ -46,4 +46,8 @@
     <string-array name="question6">
         <item>Istnieje taka możliwość, jeżeli artysta udostępni płyty do sprzedaży. Płatność gotówką.</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="schedule_title">PROGRAM</string>
+    <string name="search_hint">Wyszukaj...</string>
 </resources>

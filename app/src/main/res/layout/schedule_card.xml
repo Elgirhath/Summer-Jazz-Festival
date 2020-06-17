@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="100dp">
+
+    <TextView
+        android:id="@+id/concert_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="118dp"
+        android:layout_marginLeft="118dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginRight="18dp"
+        android:fontFamily="@font/raleway"
+        android:text="Aga Zaryan &amp; Szymon Mika"
+        android:textColor="@color/scheduleDayLabelText"
+        android:textSize="15sp" />
+
+    <ImageView
+        android:id="@+id/schedule_place_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/concert_title"
+        android:layout_alignStart="@+id/concert_title"
+        android:layout_alignLeft="@+id/concert_title"
+        android:layout_marginTop="7.75dp"
+        android:adjustViewBounds="true"
+        android:maxHeight="14dp"
+        app:srcCompat="@drawable/ic_schedule_place" />
+
+    <ImageView
+        android:id="@+id/schedule_time_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/schedule_place_icon"
+        android:layout_alignLeft="@+id/schedule_place_icon"
+        android:layout_below="@+id/schedule_place_icon"
+        android:layout_marginTop="2dp"
+        app:srcCompat="@drawable/ic_schedule_time"
+        android:adjustViewBounds="true"
+        android:maxHeight="14dp"/>
+
+    <TextView
+        android:id="@+id/schedule_place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/schedule_place_icon"
+        android:text="Piwnica Pod Baranami"
+        android:textSize="10sp"
+        android:layout_toRightOf="@id/schedule_place_icon"
+        android:layout_marginStart="3dp"
+        android:layout_marginLeft="3dp"
+        android:textColor="@color/scheduleDetails"
+        android:layout_toEndOf="@id/schedule_place_icon" />
+
+    <TextView
+        android:id="@+id/schedule_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/schedule_time_icon"
+        android:text="21:00"
+        android:textSize="10sp"
+        android:layout_toRightOf="@id/schedule_place_icon"
+        android:layout_marginStart="3dp"
+        android:layout_marginLeft="3dp"
+        android:textColor="@color/scheduleDetails"
+        android:layout_toEndOf="@id/schedule_place_icon" />
+
+    <Button
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/ic_schedule_play"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="30dp"
+        style="?android:attr/borderlessButtonStyle"/>
+
+
+</RelativeLayout>
