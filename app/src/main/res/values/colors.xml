@@ -5,4 +5,11 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="pink">#FFB6C1</color>
     <color name="title_color">#ffffff</color>
+    <color name="primaryBackground">#DE1E1E1E</color>
+
+<!--    SCHEDULE    -->
+    <color name="scheduleDayLabelBackground">#3E3D3D</color>
+    <color name="scheduleSearchText">#808080</color>
+    <color name="scheduleDayLabelText">#DCDBD2</color>
+    <color name="scheduleDetails">#A4A4A4</color>
 </resources>
