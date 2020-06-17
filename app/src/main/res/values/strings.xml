@@ -1,6 +1,49 @@
 <resources>
-    <string name="app_name">FestivalApp</string>
+    <string name="app_name"></string>
+    <string name="question1">Ile kosztują bilety?</string>
+    <string name="question2">O której odbywają się koncerty?</string>
+    <string name="question3">Ile trwają koncerty?</string>
+    <string name="question4">Czy obowiązują zniżki dla dzieci/seniorów?</string>
+    <string name="question5">Czy podczas koncertu jest możliwość zakupu napoi?</string>
+    <string name="question6">Czy będzie możliwość zakupienia płyt artysty po koncercie?</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="question1">
+        <item>Dziedziniec Pałacu pod Baranami: 80zł</item>
+        <item>Piwnica pod Baranami: 60zł</item>
+        <item>Harris Piano Jazz Bar: 40zł</item>
+        <item>Piec Art: 30zł</item>
+        <item>Urszula Dudziak Show: 120zł</item>
+        <item>Friends &amp; Karen Edwards: 100zł</item>
+        <item>Fusion Night(Billy Cobham, Vladyslav Adzik Sendecki, Adam Bałdych: 130zł</item>
+        <item>Adam Makowicz-Leszek Możdżer: 180/120zł</item>
+        <item>Zapraszamy do biura przy ul. Karmelickiej 52/1, a otrzymasz 10% zniżki! :)</item>
+        <item>W biurze płatność tylko gotówką.</item>
+    </string-array>
+
+    <string-array name="question2">
+        <item>Dziedziniec Pałacu pod Baranami: 21:00</item>
+        <item>Piwnica pod Baranami: 21:00</item>
+        <item>Harris Piano Jazz Bar: 21:30</item>
+        <item>Piec Art: 21:00</item>
+        <item>Koncerty Specjalne: 20:00</item>
+        <item>Alchemia: 20:00</item>
+        <item>U Muniaka: 21:30</item>
+
+    </string-array>
+
+    <string-array name="question3">
+        <item>Nie ma reguły, gdy w grę wchodzi jazz! :) +- 2h</item>
+    </string-array>
+
+    <string-array name="question4">
+        <item>Bilety posiadają stałą cenę. Zniżka (10%) obowiązuje tylko w biurze organizatora.</item>
+    </string-array>
+
+    <string-array name="question5">
+        <item>Na koncertach klubowych jest możlwiość zakupu napoi zarówno za pomocą karty jak i gotówki.</item>
+    </string-array>
+
+    <string-array name="question6">
+        <item>Istnieje taka możliwość, jeżeli artysta udostępni płyty do sprzedaży. Płatność gotówką.</item>
+    </string-array>
 </resources>
