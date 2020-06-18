@@ -12,4 +12,5 @@
     <color name="scheduleSearchText">#808080</color>
     <color name="scheduleDayLabelText">#DCDBD2</color>
     <color name="scheduleDetails">#A4A4A4</color>
+    <color name="scheduleTicket">#9B8914</color>
 </resources>

@@ -1,13 +1,18 @@
 package com.example.festivalapp;
 
+import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,8 +114,9 @@ public class ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return viewTypes.get(position).ordinal();
     }
 
+    @NotNull
     @Override
-    public ScheduleAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ScheduleAdapter.MyViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
         RelativeLayout relativeLayout;
         if (viewType == ViewType.DAY_LABEL.ordinal()) {
             relativeLayout = (RelativeLayout) LayoutInflater.from(parent.getContext())
@@ -128,7 +134,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NotNull RecyclerView.ViewHolder holder, int position) {
         MyViewHolder mHolder = (MyViewHolder) holder;
 
         ViewType viewType = viewTypes.get(position);
@@ -140,7 +146,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             label.setText(convertDate(date));
         }
         else if (viewType == ViewType.CONCERT_CARD){
-            Cursor concertDataCursor = getConcertCursorAtPosition(getConcertDataPosition(position));
+            final Cursor concertDataCursor = getConcertCursorAtPosition(getConcertDataPosition(position));
             TextView concertTitle = mHolder.layout.findViewById(R.id.concert_title);
             concertTitle.setText(concertDataCursor.getString(concertDataCursor.getColumnIndex(DataBaseHelper.ARTIST)));
 
@@ -150,6 +156,18 @@ public class ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             TextView concertTime = mHolder.layout.findViewById(R.id.schedule_time);
             String time = concertDataCursor.getString(concertDataCursor.getColumnIndex(DataBaseHelper.HOUR));
             concertTime.setText(convertTime(time));
+
+            Button button = mHolder.layout.findViewById(R.id.buyTicketButton);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_VIEW);
+                    intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                    intent.setData(Uri.parse(concertDataCursor.getString(concertDataCursor.getColumnIndex(DataBaseHelper.LINK))));
+                    view.getContext().startActivity(intent);
+                }
+            });
         }
     }
 
