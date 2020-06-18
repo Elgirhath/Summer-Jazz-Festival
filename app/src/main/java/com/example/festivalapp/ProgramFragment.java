@@ -56,7 +56,7 @@ public class ProgramFragment extends Fragment {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText searchInput = v.findViewById(R.id.searchInput);
+                EditText searchInput = getView().findViewById(R.id.searchInput);
                 adapter.applyQuery(searchInput.getText().toString());
             }
         });

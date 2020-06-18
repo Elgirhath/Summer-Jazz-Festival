@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private final DBmanager dBmanager;
-    private String searchQuery;
+    private String searchQuery = "";
 
     public enum ViewType {
         DAY_LABEL,
@@ -40,6 +40,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void applyQuery(String search) {
         searchQuery = search;
         assignViewTypes();
+        notifyDataSetChanged();
     }
 
     private void assignViewTypes() {
@@ -79,6 +80,18 @@ public class ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 , null);
         cursor.moveToFirst();
         return cursor;
+    }
+
+    private String convertDate(String dateAndTime) {
+        String date = dateAndTime.substring(0, dateAndTime.indexOf(" "));
+        String[] parts = date.split("-");
+        String[] months = {"stycznia", "lutego", "marca", "kwietnia", "maja", "czerwca", "lipca", "sierpnia", "września", "października", "listopada", "grudnia"};
+        String month = months[Integer.parseInt(parts[1]) - 1];
+        return parts[2] + " " + month + " " + parts[0];
+    }
+
+    private String convertTime(String time) {
+        return time.substring(0,time.indexOf(":", time.indexOf(":") + 1));
     }
 
     private int getConcertDataPosition(int recyclerViewPosition) {
@@ -123,7 +136,8 @@ public class ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         if (viewType == ViewType.DAY_LABEL) {
             Cursor nextConcertDataCursor = getConcertCursorAtPosition(getConcertDataPosition(position + 1));
             TextView label = mHolder.layout.findViewById(R.id.dayLabel);
-            label.setText(nextConcertDataCursor.getString(nextConcertDataCursor.getColumnIndex(DataBaseHelper.DATE)));
+            String date = nextConcertDataCursor.getString(nextConcertDataCursor.getColumnIndex(DataBaseHelper.DATE));
+            label.setText(convertDate(date));
         }
         else if (viewType == ViewType.CONCERT_CARD){
             Cursor concertDataCursor = getConcertCursorAtPosition(getConcertDataPosition(position));
@@ -134,7 +148,8 @@ public class ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             concertPlace.setText(concertDataCursor.getString(concertDataCursor.getColumnIndex(DataBaseHelper.PLACE)));
 
             TextView concertTime = mHolder.layout.findViewById(R.id.schedule_time);
-            concertTime.setText(concertDataCursor.getString(concertDataCursor.getColumnIndex(DataBaseHelper.HOUR)));
+            String time = concertDataCursor.getString(concertDataCursor.getColumnIndex(DataBaseHelper.HOUR));
+            concertTime.setText(convertTime(time));
         }
     }
 
