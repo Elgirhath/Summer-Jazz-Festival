@@ -1,5 +1,6 @@
 package com.example.festivalapp;
 
+import android.content.Context;
 import android.content.IntentFilter;
 import android.os.Bundle;
 
@@ -9,11 +10,17 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.VibrationEffect;
+import android.os.Vibrator;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,6 +65,63 @@ public class ProgramFragment extends Fragment {
             public void onClick(View v) {
                 EditText searchInput = getView().findViewById(R.id.searchInput);
                 adapter.applyQuery(searchInput.getText().toString());
+                InputMethodManager inputMethodManager =
+                        (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+
+                inputMethodManager.hideSoftInputFromWindow(getView().getWindowToken(), 0);
+
+                Vibrator vibe = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+                vibe.vibrate(30);
+            }
+        });
+
+        final EditText searchInput = getView().findViewById(R.id.searchInput);
+        final RelativeLayout clearInput = getView().findViewById(R.id.clearInput);
+        clearInput.setVisibility(View.INVISIBLE);
+
+        clearInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchInput.setText("");
+                adapter.applyQuery("");
+            }
+        });
+
+        searchInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.toString().isEmpty()) {
+                    clearInput.setVisibility(View.INVISIBLE);
+                }
+                else {
+                    clearInput.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        final RelativeLayout searchBar = getView().findViewById(R.id.searchBar);
+        searchBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchInput.setFocusableInTouchMode(true);
+                searchInput.requestFocus();
+                InputMethodManager inputMethodManager =
+                        (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+
+                inputMethodManager.toggleSoftInputFromWindow(
+                        getView().getApplicationWindowToken(),
+                        InputMethodManager.SHOW_FORCED, 0);
+
             }
         });
 

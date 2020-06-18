@@ -5,7 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MapFragment"
-    android:background="@color/primaryBackground">
+    android:background="@drawable/art3">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black"
+        android:alpha="0.1"/>
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -29,6 +35,26 @@
             android:background="@android:color/transparent"
             android:inputType="textPersonName"
             android:hint="@string/search_hint" />
+
+        <RelativeLayout
+            android:id="@+id/clearInput"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/searchButton"
+            android:layout_toStartOf="@id/searchButton"
+            android:layout_marginEnd="10dp">
+
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                app:srcCompat="@drawable/ic_clear"
+                android:layout_centerInParent="true"
+                />
+
+        </RelativeLayout>
+
 
         <Button
             android:id="@+id/searchButton"
