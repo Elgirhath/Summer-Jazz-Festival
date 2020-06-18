@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -12,6 +13,7 @@ import android.view.MenuItem;
 import android.widget.ExpandableListView;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -35,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
 
         dbManager = new DBmanager(this);
         dbManager.open();
-
         dbManager.insert("Aga Zaryan & Szymon Mika ", "2020-07-03 00:00:00", "21:00:00", "Dziedziniec Pałacu pod Baranami", "https://www.ticketmaster.pl/event/summer-jazz-festival-aga-zaryan-szymon-mika-bilety/17273");
         dbManager.insert("Escaubei & Tomasz Nowak Quartet", "2020-07-03 00:00:00", "21:30:00", "Harris Piano Jazz Bar", "https://www.ticketmaster.pl/event/summer-jazz-festival-escaubei-tomasz-nowak-quartet-bilety/17993");
         dbManager.insert("Wojciech Karolak Trio ", "2020-07-04 00:00:00", "21:00:00", "Dziedziniec Pałacu pod Baranami", "https://www.ticketmaster.pl/event/summer-jazz-festival-wojciech-karolak-trio-bilety/17939");
@@ -109,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
         dbManager.insert("Friends & Karen Edwards", "2020-08-07 00:00:00", "20:00:00", "Muzeum Manggha", "https://www.ticketmaster.pl/event/summer-jazz-festival-friends-karen-edwards-bilety/18063");
         dbManager.insert("Fusion Night", "2020-08-08 00:00:00", "20:00:00", "Kijów Centrum", "https://www.ticketmaster.pl/event/fusion-night-billy-cobham-adam-baldych-vladislav-adzik-sendecki-bilety/17349");
         dbManager.insert("Adam Makowicz & Leszek Możdżer", "2020-08-15 00:00:00", "20:00:00", "ICE Kraków", "https://www.ticketmaster.pl/event/summer-jazz-festival-adam-makowicz-leszek-mozdzer-bilety/17049");
-
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener bottomNavMethod = new
@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                             break;
 
                         case R.id.nav_program:
-                            fragment=new ProgramFragment();
+                            fragment=new ProgramFragment(dbManager);
                             break;
                         case R.id.nav_music:
                             fragment=new MusicFragment();

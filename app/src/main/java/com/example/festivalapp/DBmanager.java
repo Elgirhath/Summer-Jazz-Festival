@@ -21,6 +21,7 @@ public class DBmanager {
     public DBmanager open() throws SQLException {
         dbHelper = new DataBaseHelper(context);
         database = dbHelper.getWritableDatabase();
+        dbHelper.onCreate(database);
         return this;
     }
 
@@ -59,4 +60,7 @@ public class DBmanager {
         database.delete(DataBaseHelper.PROGRAM, DataBaseHelper._ID + "=" + _id, null);
     }
 
+    public SQLiteDatabase getDatabase() {
+        return database;
+    }
 }

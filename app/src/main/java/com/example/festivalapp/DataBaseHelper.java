@@ -33,14 +33,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        dropTable(db, PROGRAM);
         db.execSQL(CREATE_TABLE);
-
-
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + PROGRAM);
+        dropTable(db, PROGRAM);
         onCreate(db);
+    }
+
+    private void dropTable(SQLiteDatabase db, String tableName) {
+        db.execSQL("DROP TABLE IF EXISTS " + tableName);
     }
 }
