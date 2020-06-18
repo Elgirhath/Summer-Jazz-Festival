@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,9 +25,12 @@ import java.util.List;
  */
 public class ProgramFragment extends Fragment {
     View v;
+    private RecyclerView recyclerView;
+    private DBmanager dBmanager;
+    private ScheduleAdapter adapter;
 
-    public ProgramFragment() {
-        // Required empty public constructor
+    public ProgramFragment(DBmanager dBmanager) {
+        this.dBmanager = dBmanager;
     }
 
     @Override
@@ -43,34 +48,27 @@ public class ProgramFragment extends Fragment {
         return v;
     }
 
-
-    private void fillDataset() {
-        String[][] texts = new String[][]{
-                {"1 lipca 2020", "author"},
-                {"2 lipca 2020", "Another author"},
-                {"2 lipca 2020", "And yet another author"},
-                {"10 lipca 2020", "One more on another day"},
-                {"10 lipca 2020", "And second for the same day"}
-        };
-
-        myDataset = new ArrayList<>();
-        myDataset.addAll(Arrays.asList(texts));
-    }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        fillDataset();
+        final Button searchButton = getView().findViewById(R.id.searchButton);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText searchInput = v.findViewById(R.id.searchInput);
+                adapter.applyQuery(searchInput.getText().toString());
+            }
+        });
 
-        recyclerView = (RecyclerView) getView().findViewById(R.id.recycler);
+        recyclerView = getView().findViewById(R.id.recycler);
 
         recyclerView.setHasFixedSize(true);
 
-        layoutManager = new LinearLayoutManager(getContext());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        mAdapter = new ScheduleAdapter(myDataset);
-        recyclerView.setAdapter(mAdapter);
+        adapter = new ScheduleAdapter(dBmanager);
+        recyclerView.setAdapter(adapter);
     }
 }

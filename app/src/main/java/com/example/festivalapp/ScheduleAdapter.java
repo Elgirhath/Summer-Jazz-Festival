@@ -1,5 +1,6 @@
 package com.example.festivalapp;
 
+import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+    private final DBmanager dBmanager;
+    private String searchQuery;
 
     public enum ViewType {
         DAY_LABEL,
@@ -19,7 +22,6 @@ public class ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         BOTTOM_SPACE
     }
 
-    private List<String[]> concertsData;
     private List<ViewType> viewTypes;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -30,23 +32,53 @@ public class ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
-    public ScheduleAdapter(List<String[]> concertsData) {
-        this.concertsData = concertsData;
+    public ScheduleAdapter(DBmanager dBmanager) {
+        this.dBmanager = dBmanager;
+        assignViewTypes();
+    }
 
+    public void applyQuery(String search) {
+        searchQuery = search;
         assignViewTypes();
     }
 
     private void assignViewTypes() {
         viewTypes = new ArrayList<>();
         String previousDate = null;
-        for (String[] concertData : concertsData) {
-            if (concertData[0] != previousDate){
-                previousDate = concertData[0];
+
+        Cursor cursor = getConcertsOrderedByDate();
+        cursor.moveToPrevious();
+        int dateColumnIndex = cursor.getColumnIndex(DataBaseHelper.DATE);
+        while (cursor.moveToNext()) {
+            String date = cursor.getString(dateColumnIndex);
+            if (!date.equals(previousDate)) {
+                previousDate = date;
                 viewTypes.add(ViewType.DAY_LABEL);
             }
             viewTypes.add(ViewType.CONCERT_CARD);
         }
         viewTypes.add(ViewType.BOTTOM_SPACE);
+    }
+
+    private Cursor getConcertCursorAtPosition(int position) {
+        Cursor cursor = dBmanager.getDatabase().rawQuery(
+                "select * from " + DataBaseHelper.PROGRAM +
+                    " where " + DataBaseHelper.ARTIST + " like \"%" + searchQuery + "%\" " +
+                    " order by " + DataBaseHelper.DATE +
+                    " limit 1 offset " + position
+                , null);
+        cursor.moveToFirst();
+        return cursor;
+    }
+
+    private Cursor getConcertsOrderedByDate() {
+        Cursor cursor = dBmanager.getDatabase().rawQuery(
+                "select * from " + DataBaseHelper.PROGRAM +
+                        " where " + DataBaseHelper.ARTIST + " like \"%" + searchQuery + "%\" " +
+                        " order by " + DataBaseHelper.DATE
+                , null);
+        cursor.moveToFirst();
+        return cursor;
     }
 
     private int getConcertDataPosition(int recyclerViewPosition) {
@@ -89,14 +121,20 @@ public class ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         ViewType viewType = viewTypes.get(position);
 
         if (viewType == ViewType.DAY_LABEL) {
-            String[] nextConcertData = concertsData.get(getConcertDataPosition(position + 1));
+            Cursor nextConcertDataCursor = getConcertCursorAtPosition(getConcertDataPosition(position + 1));
             TextView label = mHolder.layout.findViewById(R.id.dayLabel);
-            label.setText(nextConcertData[0]);
+            label.setText(nextConcertDataCursor.getString(nextConcertDataCursor.getColumnIndex(DataBaseHelper.DATE)));
         }
         else if (viewType == ViewType.CONCERT_CARD){
-            String[] concertData = concertsData.get(getConcertDataPosition(position));
+            Cursor concertDataCursor = getConcertCursorAtPosition(getConcertDataPosition(position));
             TextView concertTitle = mHolder.layout.findViewById(R.id.concert_title);
-            concertTitle.setText(concertData[1]);
+            concertTitle.setText(concertDataCursor.getString(concertDataCursor.getColumnIndex(DataBaseHelper.ARTIST)));
+
+            TextView concertPlace = mHolder.layout.findViewById(R.id.schedule_place);
+            concertPlace.setText(concertDataCursor.getString(concertDataCursor.getColumnIndex(DataBaseHelper.PLACE)));
+
+            TextView concertTime = mHolder.layout.findViewById(R.id.schedule_time);
+            concertTime.setText(concertDataCursor.getString(concertDataCursor.getColumnIndex(DataBaseHelper.HOUR)));
         }
     }
 
