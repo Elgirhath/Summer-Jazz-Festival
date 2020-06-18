@@ -7,6 +7,12 @@
     tools:context=".InfoFragment"
     android:background="@drawable/art3">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black"
+        android:alpha="0.1"/>
+
     <ExpandableListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="100dp">
+    android:layout_height="wrap_content"
+    android:background="@drawable/schedule_card">
 
     <TextView
         android:id="@+id/concert_title"
@@ -18,6 +19,22 @@
         android:text="Aga Zaryan &amp; Szymon Mika"
         android:textColor="@color/scheduleDayLabelText"
         android:textSize="15sp" />
+
+    <RelativeLayout
+        android:layout_width="55dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/concert_title"
+        android:layout_alignBottom="@+id/schedule_time"
+        android:layout_marginLeft="30dp"
+        android:background="@color/noteBackgroundColor">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:srcCompat="@drawable/ic_note"
+                android:layout_centerInParent="true"
+                />
+    </RelativeLayout>
 
     <ImageView
         android:id="@+id/schedule_place_icon"
@@ -76,10 +93,11 @@
         android:layout_height="30dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/schedule_time_icon"
         android:layout_marginEnd="30dp"
+        android:layout_marginTop="-20dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginRight="30dp"
-        android:layout_marginBottom="12dp"
         android:background="@drawable/ic_buy_ticket" />
 
 
