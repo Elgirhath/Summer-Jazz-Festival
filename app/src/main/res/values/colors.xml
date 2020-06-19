@@ -13,7 +13,9 @@
     <color name="scheduleCardBorder">#88000000</color>
     <color name="cardBackgroundColor">#00000000</color>
     <color name="scheduleSearchText">#808080</color>
-    <color name="scheduleDayLabelText">#DCDBD2</color>
+    <color name="scheduleDayLabelText">#DCDCDC</color>
     <color name="scheduleDetails">#A4A4A4</color>
+
     <color name="scheduleTicket">#9B8914</color>
+    <color name="scheduleTicketDisabled">#55555555</color>
 </resources>

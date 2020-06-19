@@ -1,4 +1,4 @@
-package com.example.festivalapp;
+package com.example.festivalapp.schedule;
 
 import android.content.Context;
 import android.content.IntentFilter;
@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -22,9 +21,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import com.example.festivalapp.database.DBmanager;
+import com.example.festivalapp.MyReceiver;
+import com.example.festivalapp.R;
 
 
 /**
@@ -132,7 +131,7 @@ public class ProgramFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new ScheduleAdapter(dBmanager);
+        adapter = new ScheduleAdapter(getContext(), dBmanager);
         recyclerView.setAdapter(adapter);
     }
 }
