@@ -1,13 +1,16 @@
-package com.example.festivalapp;
+package com.example.festivalapp.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.festivalapp.database.entity.ConcertEntity;
+import com.example.festivalapp.database.orm.ORMapper;
+
 public class DataBaseHelper extends SQLiteOpenHelper {
 
     // Table Name
-    public static final String PROGRAM = "COUNTRIES";
+    public static final String TABLE_NAME = "CONCERTS";
 
     // Table columns
     public static final String _ID = "_id";
@@ -18,28 +21,41 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String LINK = "link";
 
     // Database Information
-    static final String DB_NAME = "JOURNALDEV_COUNTRIES.DB";
+    static final String DB_NAME = "SUMMER_JAZZ_FESTIVAL.DB";
 
     // database version
     static final int DB_VERSION = 1;
-
-    // Creating table query
-    private static final String CREATE_TABLE = "create table " + PROGRAM + "(" + _ID
-            + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ARTIST + " TEXT NOT NULL, " + DATE + " TEXT, " + HOUR + " TEXT, " + PLACE + " TEXT, " + LINK + " TEXT);";
 
     public DataBaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
+    private void createTable(SQLiteDatabase db) {
+        ORMapper<ConcertEntity> mapper = new ORMapper<>(ConcertEntity.class);
+        String[] values = mapper.toInsertableValues();
+
+        StringBuilder valuesJoined = new StringBuilder();
+
+        for (int i = 0; i < values.length; i++) {
+            valuesJoined.append(values[i]);
+            if (i < values.length - 1) {
+                valuesJoined.append(", ");
+            }
+        }
+
+        String query = "create table " + TABLE_NAME + "(" + valuesJoined + ");";
+        db.execSQL(query);
+    }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
-        dropTable(db, PROGRAM);
-        db.execSQL(CREATE_TABLE);
+        dropTable(db, TABLE_NAME);
+        createTable(db);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        dropTable(db, PROGRAM);
+        dropTable(db, TABLE_NAME);
         onCreate(db);
     }
 
