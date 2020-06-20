@@ -83,7 +83,7 @@
         android:layout_marginTop="42dp"
         android:fontFamily="@font/raleway_medium"
         android:text="@string/schedule_title"
-        android:textColor="@color/scheduleDayLabelText"
+        android:textColor="@color/textPrimary"
         android:textSize="20sp" />
 
 </RelativeLayout>
