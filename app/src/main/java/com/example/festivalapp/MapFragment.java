@@ -1,4 +1,4 @@
-package com.example.festivalapp;
+/*package com.example.festivalapp;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -15,9 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
+//A simple {@link Fragment} subclass.
+
 public class MapFragment extends Fragment {
 
     public MapFragment() {
@@ -63,5 +62,5 @@ public class MapFragment extends Fragment {
 
         return v;
     }
-}
+}*/
 
