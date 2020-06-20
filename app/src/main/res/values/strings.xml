@@ -28,7 +28,6 @@
         <item>Koncerty Specjalne: 20:00</item>
         <item>Alchemia: 20:00</item>
         <item>U Muniaka: 21:30</item>
-
     </string-array>
 
     <string-array name="question3">
@@ -61,7 +60,9 @@
         <item>listopada</item>
         <item>grudnia</item>
     </string-array>
-    
+
+    <string name="spotify_title">Posłuchaj nas na Spotify!</string>
+    <string name="spotify_content">Przenieś się do\u00A0świata jazzu i\u00A0posłuchaj specjalnie przygotowanej playlisty z\u00A0największymi hitami festiwalu.</string>
     
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
