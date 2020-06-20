@@ -5,14 +5,15 @@
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent"
+    android:background="@drawable/art3">
     tools:context=".MapFragment">
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:fontFamily="@font/raleway_medium"
         android:gravity="center"
         android:text="Posłuchaj nas na Spotify!"
         android:textColor="#ffffff"
@@ -20,20 +21,22 @@
         app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@+id/spotify"
         app:layout_constraintCircleRadius="0dp"
+        app:layout_constraintDimensionRatio="H,16:9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:layout_constraintDimensionRatio="H,16:9"/>
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/spotify"
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="250dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_gravity="center"
         android:clickable="true"
+        android:focusable="true"
         android:src="@mipmap/ic_spotify_foreground"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintCircleRadius="0dp"
@@ -44,11 +47,14 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="152dp"
-        android:layout_height="116dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
+        android:layout_marginBottom="80dp"
+        android:fontFamily="@font/raleway_medium"
         android:gravity="center"
-        android:text="Przenieś się do świata jazzu i posłuchaj specjalnie przygotowanej playlisty z największymi hitami festiwalu"
+        android:text="Przenieś się do świata jazzu i posłuchaj specjalnie przygotowanej playlisty z największymi hitami festiwalu."
         android:textColor="#ffffff"
         android:textSize="20sp"
         app:autoSizeTextType="uniform"
