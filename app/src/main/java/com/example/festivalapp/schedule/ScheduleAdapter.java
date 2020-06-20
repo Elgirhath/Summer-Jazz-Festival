@@ -125,7 +125,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
         else if (viewType == ViewType.CONCERT_CARD){
             ConcertEntity concertEntity = getConcertsOrderedByDate()[getConcertDataPosition(position)];
-            new ScheduleCardGenerator(context).generate(viewHolder.layout, concertEntity);
+            new ScheduleCardGenerator().generate(viewHolder.layout, concertEntity);
         }
     }
 
