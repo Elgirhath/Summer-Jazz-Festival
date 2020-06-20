@@ -27,9 +27,10 @@ public class MainActivity extends AppCompatActivity {
 
         dbManager = new DBmanager(this);
 
-        OnInstallEventManager installManager = new OnInstallEventManager(this);
+        OnInstallEventManager installManager = new OnInstallEventManager();
         if (installManager.isFirstRun()) {
             installManager.installDatabase(dbManager);
+            installManager.installNotificationService();
         }
     }
 
