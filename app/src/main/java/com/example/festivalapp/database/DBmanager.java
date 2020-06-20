@@ -44,6 +44,10 @@ public class DBmanager {
         return mapper.toObjects(cursor);
     }
 
+    public ConcertEntity[] fetch() {
+        return executeQuery("select * from " + DataBaseHelper.TABLE_NAME);
+    }
+
     public SQLiteDatabase getDatabase() {
         return database;
     }
