@@ -9,10 +9,13 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="65dp"
         android:id="@+id/list_child"
-        android:textSize="15sp"
-        android:paddingLeft="30sp"
-        android:textColor="#ffffff"/>
+        android:layout_margin="10dp"
+        android:textSize="11sp"
+        android:gravity="center"
+        android:fontFamily="@font/raleway_medium"
+        android:textColor="@color/textPrimary"
+        android:background="@drawable/schedule_day_label" />
 
 </LinearLayout>
