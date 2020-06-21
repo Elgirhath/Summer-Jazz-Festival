@@ -69,4 +69,8 @@
     <string name="schedule_title">PROGRAM</string>
     <string name="search_hint">Wyszukaj…</string>
     <string name="buy_ticket_error">Nie można otworzyć strony</string>
+
+    <string name="faq">NAJCZĘŚCIEJ ZADAWANE PYTANIA</string>
+    <string name="splash_screen_title">SUMMER JAZZ FESTIVAL KRAKÓW</string>
+    <string name="splash_screen_descr">30 dni\n+100 koncertów\n+300 wykonawców\n∞muzyki</string>
 </resources>
