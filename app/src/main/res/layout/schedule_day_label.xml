@@ -15,7 +15,7 @@
         android:paddingBottom="5dp"
         android:paddingTop="3dp"
         android:fontFamily="@font/raleway_medium"
-        android:textColor="@color/scheduleDayLabelText"
+        android:textColor="@color/textPrimary"
         android:layout_height="wrap_content"
         android:background="@drawable/schedule_day_label"
         android:layout_width="match_parent"

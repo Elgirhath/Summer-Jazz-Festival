@@ -7,10 +7,23 @@
     <color name="title_color">#ffffff</color>
     <color name="primaryBackground">#DE1E1E1E</color>
 
+<!--    COMMON     -->
+    <color name="textPrimary">#DCDCDC</color>
+
 <!--    SCHEDULE    -->
-    <color name="scheduleDayLabelBackground">#3E3D3D</color>
+    <color name="scheduleDayLabelBackground">#88000000</color>
+    <color name="noteBackgroundColor">#55000000</color>
+    <color name="scheduleCardBorder">#88000000</color>
+    <color name="cardBackgroundColor">#00000000</color>
     <color name="scheduleSearchText">#808080</color>
-    <color name="scheduleDayLabelText">#DCDBD2</color>
     <color name="scheduleDetails">#A4A4A4</color>
+
     <color name="scheduleTicket">#9B8914</color>
+    <color name="scheduleTicketDisabled">#55555555</color>
+
+<!--    NAVIGATION VIEW    -->
+    <color name="navigationBackground">#080B10</color>
+    <color name="navigationIcon">#ffffff</color>
+    <color name="rippleColor">#42A2ABD6</color>
+
 </resources>
