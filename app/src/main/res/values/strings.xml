@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name"></string>
+    <string name="app_name">Summer Jazz Festival</string>
     <string name="question1">Ile kosztują bilety?</string>
     <string name="question2">O której odbywają się koncerty?</string>
     <string name="question3">Ile trwają koncerty?</string>
@@ -71,6 +71,6 @@
     <string name="buy_ticket_error">Nie można otworzyć strony</string>
 
     <string name="faq">NAJCZĘŚCIEJ ZADAWANE PYTANIA</string>
-    <string name="splash_screen_title">SUMMER JAZZ FESTIVAL KRAKÓW</string>
-    <string name="splash_screen_descr">30 dni\n+100 koncertów\n+300 wykonawców\n∞muzyki</string>
+    <string name="splash_screen_title">SUMMER\nJAZZ\nFESTIVAL\nKRAKÓW</string>
+    <string name="splash_screen_descr">30 dni\n+100 koncertów\n+300 wykonawców\n∞ muzyki</string>
 </resources>
