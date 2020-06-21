@@ -9,7 +9,7 @@
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="match_parent"
-        android:backgroundTint="#d9d9d9"
+        android:backgroundTint="#000000"
         android:theme="@style/Spinner"
         android:spinnerMode="dropdown"
         android:textAlignment="center"
@@ -17,7 +17,9 @@
         app:layout_marginTop="0dp"
         app:ignore="MissingConstraints"
         android:fontFamily="@font/raleway_medium"
-        android:gravity="center_horizontal" />
+        android:gravity="center_horizontal"
+        android:dropDownVerticalOffset="60dp"
+        />
 
 
     <com.mapbox.mapboxsdk.maps.MapView
@@ -41,7 +43,8 @@
             android:bottomRightRadius="25dp"
             android:bottomLeftRadius="25dp"
             android:topLeftRadius="25dp"
-            android:topRightRadius="25dp"/>
+            android:topRightRadius="25dp"
+            android:fontFamily="@font/raleway_medium"/>
     </com.mapbox.mapboxsdk.maps.MapView>
 
 
