@@ -7,9 +7,13 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="65dp"
         android:id="@+id/list_parent"
-        android:textSize="20sp"
-        android:textColor="#ffffff"
-        android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"/>
+        android:textSize="15sp"
+        android:gravity="center"
+        android:fontFamily="@font/raleway_medium"
+        android:textColor="@color/textPrimary"
+        android:textColorHint="@color/scheduleSearchText"
+        android:background="@drawable/schedule_day_label"
+        />
 </LinearLayout>
