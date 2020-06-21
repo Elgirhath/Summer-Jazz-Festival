@@ -3,6 +3,8 @@ package com.example.festivalapp;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -85,12 +87,14 @@ public class MapFragment2 extends Fragment {
 
                 map = mapboxMap;
 
-                mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
+                mapboxMap.setStyle(Style.DARK, new Style.OnStyleLoaded() {
                     @Override
                     public void onStyleLoaded(@NonNull Style style) {
                         ArrayAdapter<CharSequence> mSortAdapter = new ArrayAdapter<CharSequence>(getActivity(), R.layout.customspinner, test);
                         mSortAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spinner.setAdapter(mSortAdapter);
+                        spinner.getBackground().setColorFilter(Color.parseColor("#494949"), PorterDuff.Mode.SRC_ATOP);
+
                         initMarkers(style);
 
                         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
