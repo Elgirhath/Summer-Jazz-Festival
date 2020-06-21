@@ -1,16 +1,25 @@
 package com.example.festivalapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.mapbox.geojson.Feature;
+import com.mapbox.geojson.LineString;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
+import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.geojson.Point;
@@ -27,6 +36,12 @@ import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -43,10 +58,11 @@ import java.util.List;
 public class MapFragment2 extends Fragment {
 
     private MapView mapView;
-
-    private static final String MARKER_SOURCE = "markers-source";
-    private static final String MARKER_STYLE_LAYER = "markers-style-layer";
-    private static final String MARKER_IMAGE = "custom-marker";
+    private Spinner spinner;
+    private String[] test = { "Piwnica pod Baranami", "Harris Piano Jazz Bar", "Dziedziniec Pałacu pod Baranami", "Piec Art Acoustic Jazz Club", "Klub U Muniaka", "Alchemia", "Muzeum Manggha", "Kijów Centrum", "ICE Krakow Congress Centre" };
+    private String chosen = "Piwnica pod Baranami";
+    private MapboxMap map;
+    private Button btn;
 
     public MapFragment2(){
 
@@ -58,44 +74,167 @@ public class MapFragment2 extends Fragment {
         Mapbox.getInstance(requireActivity(), "pk.eyJ1IjoiYWthd2FsZWMiLCJhIjoiY2tibnNheDczMTI4bTJ4cDkwdmlyNjhhNCJ9.ZEzMbrPFlzi4Nnl7vX8_mw");
         View view = inflater.inflate(R.layout.fragment_map, container, false);
 
+        spinner = (Spinner) view.findViewById(R.id.spinner);
+        btn = (Button) view.findViewById(R.id.buttonik);
+
         mapView = (MapView) view.findViewById(R.id.mapview);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
-            public void onMapReady(@NotNull MapboxMap mapboxMap) {
+            public void onMapReady(@NonNull final MapboxMap mapboxMap) {
+
+                map = mapboxMap;
+
                 mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
                     @Override
                     public void onStyleLoaded(@NonNull Style style) {
-                        style.addImage(MARKER_IMAGE, BitmapFactory.decodeResource(
-                                MapFragment2.this.getResources(), R.drawable.custom_marker));
-                        addMarkers(style);
+                        ArrayAdapter<CharSequence> mSortAdapter = new ArrayAdapter<CharSequence>(getActivity(), R.layout.customspinner, test);
+                        mSortAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spinner.setAdapter(mSortAdapter);
+                        initMarkers(style);
+
+                        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                            @Override
+                            public void onItemSelected(AdapterView<?> adapterView, View view,
+                                                       final int position, long id) {
+                                Object item = adapterView.getItemAtPosition(position);
+                                if (item != null) {
+                                    Toast.makeText(getContext(), item.toString(),
+                                            Toast.LENGTH_SHORT).show();
+
+                                    btn.setOnClickListener(new View.OnClickListener() {
+                                        public void onClick(View v)
+                                        {
+                                            Uri uri = Uri.parse("");
+                                            switch (position){
+                                                case 0:
+                                                    uri = Uri.parse("https://www.google.com/maps/place/Piwnica+Pod+Baranami/@50.0615985,19.9354713,15z/data=!4m2!3m1!1s0x0:0x4e9ee563e7699ca8?sa=X&ved=2ahUKEwj_zJ2p0pHqAhW-BhAIHTjaD-AQ_BIwHHoECBYQCA");
+                                                    break;
+                                                case 1:
+                                                    uri = Uri.parse("https://goo.gl/maps/6DbYBhKfvQNykmem6");
+                                                    break;
+                                                case 2:
+                                                    uri = Uri.parse("https://goo.gl/maps/zHdHYGU3aaNHqVY29");
+                                                    break;
+                                                case 3:
+                                                    uri = Uri.parse("https://goo.gl/maps/1BfVZUHKtgzyqKV5A");
+                                                    break;
+                                                case 4:
+                                                    uri = Uri.parse("https://goo.gl/maps/FNtokqSc5JnhdrHj6");
+                                                    break;
+                                                case 5:
+                                                    uri = Uri.parse("https://www.google.com/maps/place/Piwnica+Pod+Baranami/@50.0615985,19.9354713,15z/data=!4m2!3m1!1s0x0:0x4e9ee563e7699ca8?sa=X&ved=2ahUKEwj_zJ2p0pHqAhW-BhAIHTjaD-AQ_BIwHHoECBYQCA");
+                                                    break;
+                                                case 6:
+                                                    uri = Uri.parse("https://www.google.com/maps/place/Manggha+Centre/@50.0507577,19.9314921,15z/data=!4m2!3m1!1s0x0:0x9076d27e065dbd87?sa=X&ved=2ahUKEwj4urbH0pHqAhXKAhAIHcn6Al4Q_BIwDXoECBIQCA");
+                                                    break;
+                                                case 7:
+                                                    uri = Uri.parse("https://goo.gl/maps/GH5DwbPYRSUiBFGp9");
+                                                    break;
+                                                case 8:
+                                                    uri = Uri.parse("https://goo.gl/maps/btx7Rpfqoxb1Ydob9");
+                                                    break;
+                                                default:
+                                                    uri = Uri.parse("https://www.google.com/maps/place/Piwnica+Pod+Baranami/@50.0615985,19.9354713,15z/data=!4m5!3m4!1s0x0:0x4e9ee563e7699ca8!8m2!3d50.0615985!4d19.9354713");
+                                            }
+
+                                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                            startActivity(intent);
+                                        }
+                                    });
+                                }
+
+
+                                listen_to_scroll(position, view);
+
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> adapterView) {
+                                // TODO Auto-generated method stub
+
+                            }
+                        });
                     }
                 });
             }
         });
-
         return view;
     }
 
-    private void addMarkers(@NonNull Style loadedMapStyle) {
-        List<Feature> features = new ArrayList<>();
-        features.add(Feature.fromGeometry(Point.fromLngLat(19.9357, 50.0617)));
+    private void initMarkers(@NonNull Style style) {
+        style.addImage(("marker_icon"), BitmapFactory.decodeResource(
+                getResources(), R.drawable.custom_marker));
 
-        /* Source: A data source specifies the geographic coordinate where the image marker gets placed. */
+        style.addSource(new GeoJsonSource("source-id"));
 
-        loadedMapStyle.addSource(new GeoJsonSource(MARKER_SOURCE, FeatureCollection.fromFeatures(features)));
-
-        /* Style layer: A style layer ties together the source and image and specifies how they are displayed on the map. */
-        loadedMapStyle.addLayer(new SymbolLayer(MARKER_STYLE_LAYER, MARKER_SOURCE)
+        style.addLayer(new SymbolLayer("layer-id", "source-id")
                 .withProperties(
-                        PropertyFactory.iconAllowOverlap(true),
+                        PropertyFactory.iconImage("marker_icon"),
                         PropertyFactory.iconIgnorePlacement(true),
-                        PropertyFactory.iconImage(MARKER_IMAGE),
-// Adjust the second number of the Float array based on the height of your marker image.
-// This is because the bottom of the marker should be anchored to the coordinate point, rather
-// than the middle of the marker being the anchor point on the map.
-                        PropertyFactory.iconOffset(new Float[] {0f, -9f})
+                        PropertyFactory.iconAllowOverlap(true)
                 ));
+    }
+
+    private void listen_to_scroll(int pos, View view){
+        LatLng position_piwnica = new LatLng(50.0615985, 19.9332826);
+        LatLng position_harris = new LatLng(50.0617, 19.9333793);
+        LatLng dziedziniec = new LatLng(50.061587, 19.9330223);
+        LatLng piec = new LatLng(50.0616452, 19.9360246);
+        LatLng muniak = new LatLng(50.0619822, 19.9382254);
+        LatLng alchemia = new LatLng(50.052196, 19.9427967);
+        LatLng manga = new LatLng(50.0507577, 19.9293034);
+        LatLng ice = new LatLng(50.0477778, 19.9292002);
+        LatLng kijow = new LatLng(50.0582622, 19.9227563);
+
+        switch(pos) {
+            case 0:
+                update_marker(position_piwnica);
+                break;
+            case 1:
+                update_marker(position_harris);
+                break;
+            case 2:
+                update_marker(dziedziniec);
+                break;
+            case 3:
+                update_marker(piec);
+                break;
+            case 4:
+                update_marker(muniak);
+                break;
+            case 5:
+                update_marker(alchemia);
+                break;
+            case 6:
+                update_marker(manga);
+                break;
+            case 7:
+                update_marker(kijow);
+                break;
+            case 8:
+                update_marker(ice);
+                break;
+            default:
+                update_marker(position_piwnica);
+        }
+
+
+    }
+
+    private void update_marker(LatLng position) {
+        if (map.getStyle() != null) {
+            GeoJsonSource current_loc = map.getStyle().getSourceAs("source-id");
+            if (current_loc != null) {
+                Point actual = Point.fromLngLat(position.getLongitude(), position.getLatitude());
+                current_loc.setGeoJson(FeatureCollection.fromFeature(
+                        Feature.fromGeometry(actual)
+                ));
+            }
+        }
+
+        map.animateCamera(CameraUpdateFactory.newLatLng(position));
     }
 
     @Override
@@ -105,15 +244,21 @@ public class MapFragment2 extends Fragment {
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        mapView.onPause();
+    public void onStart() {
+        super.onStart();
+        mapView.onStart();
     }
 
     @Override
-    public void onSaveInstanceState(@NotNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        mapView.onSaveInstanceState(outState);
+    public void onStop() {
+        super.onStop();
+        mapView.onStop();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mapView.onPause();
     }
 
     @Override
@@ -123,12 +268,15 @@ public class MapFragment2 extends Fragment {
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-
+    public void onDestroy() {
+        super.onDestroy();
         mapView.onDestroy();
-
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mapView.onSaveInstanceState(outState);
+    }
 
 }
