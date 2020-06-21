@@ -4,49 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/art3"
+    android:background="@drawable/splash_screen"
     tools:context=".SplashScreen"
     android:padding="40dp">
-
-    <TextView
-        android:id="@+id/title"
-        android:textSize="40dp"
-        android:gravity="right"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="80dp"
-        android:lineSpacingExtra="-2dp"
-        android:fontFamily="@font/raleway_medium"
-        android:textColor="@color/scheduleTicket"
-        android:text="@string/splash_screen_title"
-        android:layout_alignParentRight="true" />
-
-    <View
-        android:id="@+id/divider"
-        android:background="#ffffff"
-        android:layout_below="@+id/title"
-        android:layout_marginTop="30dp"
-        android:layout_alignParentEnd="true"
-        android:layout_width = "131dp"
-        android:layout_height="1dp"
-        android:layout_alignParentRight="true" />
-
-    <TextView
-        android:layout_below="@id/divider"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="right"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="20dp"
-        android:lineSpacingExtra="8dp"
-        android:fontFamily="@font/raleway"
-        android:text="@string/splash_screen_descr"
-        android:textColor="@color/textPrimary"
-        android:textSize="20sp"/>
 
 </RelativeLayout>
