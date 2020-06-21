@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".InfoFragment"
-    android:background="@drawable/art3">
+    android:background="@drawable/background_primary">
 
     <View
         android:layout_width="match_parent"
