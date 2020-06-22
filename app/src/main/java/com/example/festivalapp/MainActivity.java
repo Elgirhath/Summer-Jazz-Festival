@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigationView=findViewById(R.id.bottomNav);
         bottomNavigationView.setOnNavigationItemSelectedListener(bottomNavMethod);
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, new MapFragment2()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, new MapFragment()).commit();
 
         dbManager = new DBmanager(this);
 
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                     switch (item.getItemId())
                     {
                         case R.id.nav_map:
-                            fragment=new MapFragment2();
+                            fragment=new MapFragment();
                             break;
 
                         case R.id.nav_program:
