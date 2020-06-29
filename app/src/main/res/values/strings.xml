@@ -74,4 +74,5 @@
     <string name="splash_screen_title">SUMMER\nJAZZ\nFESTIVAL\nKRAKÓW</string>
     <string name="splash_screen_descr">30 dni\n+100 koncertów\n+300 wykonawców\n∞ muzyki</string>
     <string name="go_to_spotify_desc">Go to Spotify playlist</string>
+    <string name="buy_ticket_desc">Kup bilet</string>
 </resources>
