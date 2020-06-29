@@ -21,9 +21,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        bottomNavigationView=findViewById(R.id.bottomNav);
-        bottomNavigationView.setOnNavigationItemSelectedListener(bottomNavMethod);
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, new MapFragment()).commit();
 
         dbManager = new DBmanager(this);
 
@@ -32,6 +29,10 @@ public class MainActivity extends AppCompatActivity {
             installManager.installDatabase(dbManager);
             installManager.installNotificationService();
         }
+
+        bottomNavigationView=findViewById(R.id.bottomNav);
+        bottomNavigationView.setOnNavigationItemSelectedListener(bottomNavMethod);
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, new ProgramFragment(dbManager)).commit();
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener bottomNavMethod = new
@@ -42,13 +43,14 @@ public class MainActivity extends AppCompatActivity {
                     Fragment fragment = null;
                     switch (item.getItemId())
                     {
+                        case R.id.nav_program:
+                            fragment=new ProgramFragment(dbManager);
+                            break;
+
                         case R.id.nav_map:
                             fragment=new MapFragment();
                             break;
 
-                        case R.id.nav_program:
-                            fragment=new ProgramFragment(dbManager);
-                            break;
                         case R.id.nav_music:
                             fragment=new MusicFragment();
                             break;

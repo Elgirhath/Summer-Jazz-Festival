@@ -22,7 +22,6 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 
 import com.example.festivalapp.database.DBmanager;
-import com.example.festivalapp.MyReceiver;
 import com.example.festivalapp.R;
 
 
@@ -44,13 +43,6 @@ public class ProgramFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_program, container, false);
-        MyReceiver myReceiver = new MyReceiver();
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("android.intent.action.ACTION_POWER_DISCONNECTED");
-        intentFilter.addAction("android.intent.action.ACTION_POWER_CONNECTED");
-        intentFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
-        intentFilter.addAction("android.net.wifi.WIFI_STATE_CHANGED");
-        getActivity().registerReceiver(myReceiver, intentFilter);
         return v;
     }
 

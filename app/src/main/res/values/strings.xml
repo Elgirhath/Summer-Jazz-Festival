@@ -8,42 +8,44 @@
     <string name="question6">Czy będzie możliwość zakupienia płyt artysty po koncercie?</string>
 
     <string-array name="question1">
-        <item>Dziedziniec Pałacu pod Baranami: 80zł</item>
-        <item>Piwnica pod Baranami: 60zł</item>
-        <item>Harris Piano Jazz Bar: 40zł</item>
-        <item>Piec Art: 30zł</item>
-        <item>Urszula Dudziak Show: 120zł</item>
-        <item>Friends &amp; Karen Edwards: 100zł</item>
-        <item>Fusion Night(Billy Cobham, Vladyslav Adzik Sendecki, Adam Bałdych: 130zł</item>
-        <item>Adam Makowicz-Leszek Możdżer: 180/120zł</item>
-        <item>Zapraszamy do biura przy ul. Karmelickiej 52/1, a otrzymasz 10% zniżki! :)</item>
-        <item>W biurze płatność tylko gotówką.</item>
+        <item>\nDziedziniec Pałacu pod Baranami: 80zł\n\n
+            Piwnica pod Baranami: 60zł\n\n
+            Harris Piano Jazz Bar: 40zł\n\n
+            Piec Art: 30zł\n\n
+            Urszula Dudziak Show: 120zł\n\n
+            Friends &amp; Karen Edwards: 100zł\n\n
+            Fusion Night(Billy Cobham, Vladyslav\n\n
+            Adzik Sendecki, Adam Bałdych: 130zł\n\n
+            Adam Makowicz-Leszek Możdżer: 180/120zł\n\n
+            Zapraszamy do biura przy ul. Karmelickiej 52/1,\n\n
+            a otrzymasz 10% zniżki! :)\n\n
+            W biurze płatność tylko gotówką.\n</item>
     </string-array>
 
     <string-array name="question2">
-        <item>Dziedziniec Pałacu pod Baranami: 21:00</item>
-        <item>Piwnica pod Baranami: 21:00</item>
-        <item>Harris Piano Jazz Bar: 21:30</item>
-        <item>Piec Art: 21:00</item>
-        <item>Koncerty Specjalne: 20:00</item>
-        <item>Alchemia: 20:00</item>
-        <item>U Muniaka: 21:30</item>
+        <item>\nDziedziniec Pałacu pod Baranami: 21:00\n\n
+            Piwnica pod Baranami: 21:00\n\n
+            Harris Piano Jazz Bar: 21:30\n\n
+            Piec Art: 21:00\n\n
+            Koncerty Specjalne: 20:00\n\n
+            Alchemia: 20:00\n\n
+            U Muniaka: 21:30\n</item>
     </string-array>
 
     <string-array name="question3">
-        <item>Nie ma reguły, gdy w grę wchodzi jazz! :) +- 2h</item>
+        <item>\nNie ma reguły, gdy w grę wchodzi jazz! :) +- 2h\n</item>
     </string-array>
 
     <string-array name="question4">
-        <item>Bilety posiadają stałą cenę. Zniżka (10%) obowiązuje tylko w biurze organizatora.</item>
+        <item>\nBilety posiadają stałą cenę. Zniżka (10%) obowiązuje tylko w biurze organizatora.\n</item>
     </string-array>
 
     <string-array name="question5">
-        <item>Na koncertach klubowych jest możlwiość zakupu napoi zarówno za pomocą karty jak i gotówki.</item>
+        <item>\nNa koncertach klubowych jest możlwiość zakupu napoi zarówno za pomocą karty jak i gotówki.\n</item>
     </string-array>
 
     <string-array name="question6">
-        <item>Istnieje taka możliwość, jeżeli artysta udostępni płyty do sprzedaży. Płatność gotówką.</item>
+        <item>\nIstnieje taka możliwość, jeżeli artysta udostępni płyty do sprzedaży. Płatność gotówką.\n</item>
     </string-array>
     
     <string-array name="months_declensioned">
