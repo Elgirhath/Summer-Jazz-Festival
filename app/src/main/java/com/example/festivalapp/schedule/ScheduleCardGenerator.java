@@ -6,6 +6,7 @@ import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,20 +28,19 @@ public class ScheduleCardGenerator {
         String time = concertEntity.HOUR;
         concertTime.setText(time);
 
-        Button button = layout.findViewById(R.id.buyTicketButton);
+        ImageView ticketButton = layout.findViewById(R.id.buyTicketButton);
         if (concertEntity.LINK.isEmpty()) {
-            button.getBackground().mutate().setColorFilter(
-                    ContextCompat.getColor(App.getContext(), R.color.scheduleTicketDisabled),
-                    PorterDuff.Mode.SRC_IN);
+            ticketButton.setImageDrawable(ContextCompat.getDrawable(App.getContext(), R.drawable.ic_ticket_grayed));
+//            ticketButton.setColorFilter(
+//                    ContextCompat.getColor(App.getContext(), R.color.scheduleTicketDisabled),
+//                    PorterDuff.Mode.SRC_IN);
 
-            button.setOnClickListener(null);
+            ticketButton.setOnClickListener(null);
         }
         else {
-            button.getBackground().mutate().setColorFilter(
-                    ContextCompat.getColor(App.getContext(), R.color.scheduleTicket),
-                    PorterDuff.Mode.SRC_IN);
+            ticketButton.setImageDrawable(ContextCompat.getDrawable(App.getContext(), R.drawable.ic_ticket));
 
-            button.setOnClickListener(new View.OnClickListener() {
+            ticketButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     try {
