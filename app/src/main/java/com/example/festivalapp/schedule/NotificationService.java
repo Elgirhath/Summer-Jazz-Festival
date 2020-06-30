@@ -40,9 +40,9 @@ public class NotificationService extends Service {
     NotificationManager notificationManager;
 
     private String[] notificationDateFrame = new String[]{"2020-07-05", "2020-08-10"}; // [inclusive, exclusive)
-    private String additionalNotificationDate = "2020-06-30";
+    private String additionalNotificationDate = "2020-08-15";
 
-    private String notificationTime = "16:39";
+    private String notificationTime = "13:00";
 
     @Nullable
     @Override
