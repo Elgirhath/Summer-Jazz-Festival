@@ -7,9 +7,11 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Debug;
 import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
@@ -38,9 +40,9 @@ public class NotificationService extends Service {
     NotificationManager notificationManager;
 
     private String[] notificationDateFrame = new String[]{"2020-07-05", "2020-08-10"}; // [inclusive, exclusive)
-    private String additionalNotificationDate = "2020-08-15";
+    private String additionalNotificationDate = "2020-06-30";
 
-    private String notificationTime = "13:00";
+    private String notificationTime = "16:39";
 
     @Nullable
     @Override
@@ -52,7 +54,7 @@ public class NotificationService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
 
-        Log.d("NotificationService", "onStartCommand: ");
+        Log.d("NotificationService", "onStartCommand");
 
         createNotificationChannel();
         setupNotificationTimers();
@@ -62,6 +64,7 @@ public class NotificationService extends Service {
 
     @Override
     public void onDestroy() {
+        Log.d("NotificationService", "Notification service destroyed");
         stoptimertask();
         super.onDestroy();
     }
@@ -177,6 +180,7 @@ public class NotificationService extends Service {
     }
 
     private void postNotification(int channelIndex, String title, String content) {
+        Log.d("NotificationService", "Posting notification...");
         Intent notificationIntent = new Intent(App.getContext(), MainActivity.class);
 
         PendingIntent intent = PendingIntent.getActivity(App.getContext(), 0,
