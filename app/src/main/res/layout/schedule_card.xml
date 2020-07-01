@@ -86,10 +86,9 @@
         android:textColor="@color/scheduleDetails"
         android:layout_toEndOf="@id/schedule_place_icon" />
 
-    <Button
+    <ImageView
         android:id="@+id/buyTicketButton"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="30dp"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
@@ -98,7 +97,22 @@
         android:layout_marginTop="-20dp"
         android:layout_marginBottom="20dp"
         android:layout_marginRight="30dp"
-        android:background="@drawable/ic_buy_ticket" />
+        app:srcCompat="@drawable/ic_ticket"
+        android:contentDescription="@string/buy_ticket_desc" />
+
+<!--    <Button-->
+<!--        android:id="@+id/buyTicketButton"-->
+<!--        style="?android:attr/borderlessButtonStyle"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:layout_below="@+id/schedule_time_icon"-->
+<!--        android:layout_marginEnd="30dp"-->
+<!--        android:layout_marginTop="-20dp"-->
+<!--        android:layout_marginBottom="20dp"-->
+<!--        android:layout_marginRight="30dp"-->
+<!--        android:background="@drawable/ic_ticket" />-->
 
 
 </RelativeLayout>

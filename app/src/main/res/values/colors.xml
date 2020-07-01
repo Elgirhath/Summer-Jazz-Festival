@@ -19,7 +19,9 @@
     <color name="scheduleDetails">#A4A4A4</color>
 
     <color name="scheduleTicket">#9B8914</color>
-    <color name="scheduleTicketDisabled">#55555555</color>
+    <color name="scheduleTicketDisabled">#77555555</color>
+    <color name="scheduleTicketDisabledStroke">#55000000</color>
+    <color name="scheduleTicketStroke">#545353</color>
 
 <!--    NAVIGATION VIEW    -->
     <color name="navigationBackground">#080B10</color>

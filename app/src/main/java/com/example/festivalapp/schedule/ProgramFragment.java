@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Vibrator;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +64,7 @@ public class ProgramFragment extends Fragment {
 
                 Vibrator vibe = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
                 vibe.vibrate(30);
+                recyclerView.scrollToPosition(0);
             }
         });
 
@@ -75,6 +77,7 @@ public class ProgramFragment extends Fragment {
             public void onClick(View view) {
                 searchInput.setText("");
                 adapter.applyQuery("");
+                recyclerView.scrollToPosition(0);
             }
         });
 
@@ -98,6 +101,15 @@ public class ProgramFragment extends Fragment {
             public void afterTextChanged(Editable editable) {
 
             }
+        });
+
+        searchInput.setOnKeyListener((v, keyCode, event) -> {
+            if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                    (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                searchButton.callOnClick();
+                return true;
+            }
+            return false;
         });
 
         final RelativeLayout searchBar = getView().findViewById(R.id.searchBar);
