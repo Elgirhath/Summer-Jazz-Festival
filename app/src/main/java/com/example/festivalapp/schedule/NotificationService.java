@@ -1,18 +1,24 @@
 package com.example.festivalapp.schedule;
 
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Debug;
 import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.festivalapp.App;
+import com.example.festivalapp.MainActivity;
 import com.example.festivalapp.R;
 import com.example.festivalapp.database.DBmanager;
 import com.example.festivalapp.database.entity.ConcertEntity;
@@ -29,12 +35,14 @@ import java.util.TimerTask;
 
 public class NotificationService extends Service {
     List<Timer> timers = new ArrayList<>();
-    private DBmanager dbManager;
 
     String notificationChannelId = "schedule_notif_channel_1";
     NotificationManager notificationManager;
 
-    private List<ConcertEntity> concertEntities;
+    private String[] notificationDateFrame = new String[]{"2020-07-05", "2020-08-10"}; // [inclusive, exclusive)
+    private String additionalNotificationDate = "2020-08-15";
+
+    private String notificationTime = "13:00";
 
     @Nullable
     @Override
@@ -46,68 +54,110 @@ public class NotificationService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
 
-        dbManager = new DBmanager(App.getContext());
+        Log.d("NotificationService", "onStartCommand");
 
-        fetchConcertData();
         createNotificationChannel();
         setupNotificationTimers();
 
         return START_STICKY;
     }
 
-    private void fetchConcertData() {
-        concertEntities = Arrays.asList(dbManager.fetch());
-    }
-
     @Override
     public void onDestroy() {
+        Log.d("NotificationService", "Notification service destroyed");
         stoptimertask();
         super.onDestroy();
     }
 
     final Handler handler = new Handler();
 
-    private Date getNotificationTime(ConcertEntity concertEntity) {
-        try {
-            SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd");
-            Date date = dateParser.parse(concertEntity.DATE);
+    private List<Date> getNotificationTimes() throws ParseException {
+        SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd");
+        Date startDate = dateParser.parse(notificationDateFrame[0]);
+        Date endDate = dateParser.parse(notificationDateFrame[1]);
 
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(date);
-            cal.add(Calendar.DATE, -1);
+        List<Date> dates = new ArrayList<>();
 
-            cal.set(Calendar.HOUR_OF_DAY, 19);
-            cal.set(Calendar.MINUTE, 0);
-            cal.set(Calendar.SECOND, 0);
+        Date currentDate = (Date) startDate.clone();
 
-            Date notificationDate = cal.getTime();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(currentDate);
 
-            return notificationDate;
+        while (!currentDate.after(endDate)) {
+            dates.add(getNotificationTime(currentDate));
+
+            cal.add(Calendar.DATE, 7);
+            currentDate = cal.getTime();
         }
-        catch (ParseException e) {
-            Log.e("Notification", e.getMessage());
-            return null;
-        }
+
+        return dates;
+    }
+
+    private Date getNotificationTime(Date date) {
+        String[] timeSplit = notificationTime.split(":");
+        int hour = Integer.parseInt(timeSplit[0]);
+        int minute = Integer.parseInt(timeSplit[1]);
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+
+        cal.set(Calendar.HOUR_OF_DAY, hour);
+        cal.set(Calendar.MINUTE, minute);
+        cal.set(Calendar.SECOND, 0);
+
+        return cal.getTime();
+    }
+
+    private Date getAdditionalNotificationTime() throws ParseException {
+        SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd");
+        Date additionalDate = dateParser.parse(additionalNotificationDate);
+        return getNotificationTime(additionalDate);
     }
 
     public void setupNotificationTimers() {
-        for (ConcertEntity concert : concertEntities) {
-            Timer timer = new Timer();
+        try {
+            List<Date> notificationDates = getNotificationTimes();
+            for (Date date : notificationDates) {
+                scheduleNotification(
+                        date,
+                        notificationDates.indexOf(date) + 1,
+                        getString(R.string.notification_title),
+                        getString(R.string.notification_desc)
+                );
+            }
 
-            Date currentTime = Calendar.getInstance().getTime();
-            Date notificationTime = getNotificationTime(concert);
+            scheduleNotification(
+                    getAdditionalNotificationTime(),
+                    0,
+                    getString(R.string.additional_notification_title),
+                    getString(R.string.additional_notification_desc)
+            );
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
 
-            long delay = notificationTime.getTime() - currentTime.getTime();
+    private void scheduleNotification(Date date, int channel, String title, String content) {
+        Timer timer = new Timer();
 
-            TimerTask timerTask = new TimerTask() {
-                public void run() {
-                    handler.post(() -> postNotification(concert));
-                }
-            };
+        Date currentTime = Calendar.getInstance().getTime();
 
+        long delay = date.getTime() - currentTime.getTime();
+
+        TimerTask timerTask = new TimerTask() {
+            public void run() {
+                handler.post(() -> postNotification(channel, title, content));
+            }
+        };
+
+        try {
             timer.schedule(timerTask, delay);
             timers.add(timer);
         }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
     }
 
     public void stoptimertask() {
@@ -129,13 +179,21 @@ public class NotificationService extends Service {
         }
     }
 
-    private void postNotification(ConcertEntity concert) {
+    private void postNotification(int channelIndex, String title, String content) {
+        Log.d("NotificationService", "Posting notification...");
+        Intent notificationIntent = new Intent(App.getContext(), MainActivity.class);
+
+        PendingIntent intent = PendingIntent.getActivity(App.getContext(), 0,
+                notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, notificationChannelId)
                 .setSmallIcon(R.drawable.ic_note)
-                .setContentTitle(concert.ARTIST)
-                .setContentText("Jutro o " + concert.HOUR + " - " + concert.PLACE)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                .setContentTitle(title)
+                .setContentText(content)
+                .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(intent);
 
-        notificationManager.notify(concertEntities.indexOf(concert), builder.build());
+        notificationManager.notify(channelIndex, builder.build());
     }
 }

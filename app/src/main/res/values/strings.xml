@@ -65,8 +65,13 @@
 
     <string name="spotify_title">Posłuchaj nas na Spotify!</string>
     <string name="spotify_content">Przenieś się do\u00A0świata jazzu i\u00A0posłuchaj specjalnie przygotowanej playlisty z\u00A0największymi hitami festiwalu.</string>
-    
-    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="notification_title">Przed nami nowy tydzień festiwalu!</string>
+    <string name="notification_desc">Zobacz, co gramy w tym tygodniu 🙂</string>
+
+    <string name="additional_notification_title">Dziś ostatni dzień festiwalu!</string>
+    <string name="additional_notification_desc">Zapraszamy na finałowy koncert</string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="schedule_title">PROGRAM</string>
     <string name="search_hint">Wyszukaj…</string>
@@ -76,4 +81,5 @@
     <string name="splash_screen_title">SUMMER\nJAZZ\nFESTIVAL\nKRAKÓW</string>
     <string name="splash_screen_descr">30 dni\n+100 koncertów\n+300 wykonawców\n∞ muzyki</string>
     <string name="go_to_spotify_desc">Go to Spotify playlist</string>
+    <string name="buy_ticket_desc">Kup bilet</string>
 </resources>

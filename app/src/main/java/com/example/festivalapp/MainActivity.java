@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.festivalapp.database.DBmanager;
 import com.example.festivalapp.schedule.ProgramFragment;
@@ -18,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("MainActivity", "onCreate()");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -25,10 +29,7 @@ public class MainActivity extends AppCompatActivity {
         dbManager = new DBmanager(this);
 
         OnInstallEventManager installManager = new OnInstallEventManager();
-        if (installManager.isFirstRun()) {
-            installManager.installDatabase(dbManager);
-            installManager.installNotificationService();
-        }
+        installManager.install();
 
         bottomNavigationView=findViewById(R.id.bottomNav);
         bottomNavigationView.setOnNavigationItemSelectedListener(bottomNavMethod);

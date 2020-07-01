@@ -1,9 +1,12 @@
 package com.example.festivalapp;
 
+import android.app.ActivityManager;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import com.example.festivalapp.database.DBmanager;
 import com.example.festivalapp.database.entity.ConcertEntity;
@@ -15,11 +18,24 @@ import java.io.IOException;
 public class OnInstallEventManager {
     private boolean isFirstRun;
     private SharedPreferences preferences;
+    private DBmanager dbManager;
 
     public OnInstallEventManager() {
         preferences = PreferenceManager.getDefaultSharedPreferences(App.getContext());
         isFirstRun = preferences.getBoolean("PREFERENCE_FIRST_RUN", true);
         preferences.edit().putBoolean("PREFERENCE_FIRST_RUN", false).apply();
+        Log.d("OnInstallEventManager", "OnInstallEventManager " + isFirstRun);
+
+        dbManager = new DBmanager(App.getContext());
+    }
+
+    public void install() {
+        if (isFirstRun()) {
+            installDatabase(dbManager);
+        }
+        if (!isNotificationServiceRunning()) {
+            installNotificationService();
+        }
     }
 
     public void installDatabase(DBmanager dbManager) {
@@ -40,5 +56,15 @@ public class OnInstallEventManager {
 
     public boolean isFirstRun() {
         return isFirstRun;
+    }
+
+    public boolean isNotificationServiceRunning() {
+        ActivityManager manager = (ActivityManager) App.getContext().getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (NotificationService.class.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
