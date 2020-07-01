@@ -1,11 +1,8 @@
 package com.example.festivalapp.schedule;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,9 +28,6 @@ public class ScheduleCardGenerator {
         ImageView ticketButton = layout.findViewById(R.id.buyTicketButton);
         if (concertEntity.LINK.isEmpty()) {
             ticketButton.setImageDrawable(ContextCompat.getDrawable(App.getContext(), R.drawable.ic_ticket_grayed));
-//            ticketButton.setColorFilter(
-//                    ContextCompat.getColor(App.getContext(), R.color.scheduleTicketDisabled),
-//                    PorterDuff.Mode.SRC_IN);
 
             ticketButton.setOnClickListener(null);
         }
