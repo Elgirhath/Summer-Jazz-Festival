@@ -27,6 +27,7 @@
     <color name="navigationBackground">#080B10</color>
     <color name="navigationIcon">#ffffff</color>
     <color name="rippleColor">#42A2ABD6</color>
+    <color name="bottomNavigationBarColor">#0B0F17</color>
 
 
 </resources>
