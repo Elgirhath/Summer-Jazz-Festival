@@ -3,14 +3,17 @@ package com.example.festivalapp.map;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.festivalapp.R;
@@ -32,6 +35,7 @@ import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -45,6 +49,7 @@ public class MapFragment extends Fragment {
     private MapboxMap map;
     private Button btn;
     LocationRepository repository;
+    private Location currentLocation;
 
     public MapFragment(){
         repository = new LocationRepository();
@@ -54,18 +59,27 @@ public class MapFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         Mapbox.getInstance(requireActivity(), "pk.eyJ1IjoiYWthd2FsZWMiLCJhIjoiY2tibnNheDczMTI4bTJ4cDkwdmlyNjhhNCJ9.ZEzMbrPFlzi4Nnl7vX8_mw");
-        View view = inflater.inflate(R.layout.fragment_map, container, false);
+        ConstraintLayout layout = (ConstraintLayout) inflater.inflate(R.layout.fragment_map, container, false);
 
-        spinner = view.findViewById(R.id.spinner);
-        btn = view.findViewById(R.id.buttonik);
+        spinner = layout.findViewById(R.id.spinner);
+        btn = layout.findViewById(R.id.buttonik);
 
-        mapView = view.findViewById(R.id.mapview);
+        mapView = layout.findViewById(R.id.mapview);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(@NonNull final MapboxMap mapboxMap) {
 
                 map = mapboxMap;
+
+                map.addOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
+                    @Override
+                    public void onCameraMove() {
+                        PointF screenPoint = map.getProjection().toScreenLocation(currentLocation.coordinates);
+                        btn.setTranslationX(screenPoint.x - btn.getWidth()/2);
+                        btn.setTranslationY(screenPoint.y + 2 * btn.getHeight());
+                    }
+                });
 
                 mapboxMap.setStyle(Style.DARK, new Style.OnStyleLoaded() {
                     @Override
@@ -82,12 +96,13 @@ public class MapFragment extends Fragment {
                             @Override
                             public void onItemSelected(AdapterView<?> adapterView, View view,
                                                        final int position, long id) {
+                                currentLocation = repository.getLocationList().get(position);
                                 Object item = adapterView.getItemAtPosition(position);
                                 if (item != null) {
                                     btn.setOnClickListener(new View.OnClickListener() {
                                         public void onClick(View v)
                                         {
-                                            Uri uri = Uri.parse(repository.getLocationList().get(position).url);
+                                            Uri uri = Uri.parse(currentLocation.url);
 
                                             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                                             startActivity(intent);
@@ -95,10 +110,7 @@ public class MapFragment extends Fragment {
                                     });
                                 }
 
-
-
-                                update_marker(repository.getLocationList().get(position).coordinates);
-
+                                update_marker(currentLocation.coordinates);
                             }
 
                             @Override
@@ -111,7 +123,7 @@ public class MapFragment extends Fragment {
                 });
             }
         });
-        return view;
+        return layout;
     }
 
     private void initMarkers(@NonNull Style style) {
