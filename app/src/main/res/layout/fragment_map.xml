@@ -40,7 +40,7 @@
             android:text="Nawiguj"
             android:background="@layout/navbutton"
             android:textColor="#FFFFFF"
-            android:layout_marginTop="400dp"
+            android:layout_marginTop="420dp"
             android:bottomRightRadius="25dp"
             android:bottomLeftRadius="25dp"
             android:topLeftRadius="25dp"
