@@ -3,7 +3,12 @@
     android:id="@+id/textViewSpinnerItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    style="@style/SpinnerTextViewItem"
     android:gravity="center_horizontal"
+    android:textColor="@color/textPrimary"
+    android:fontFamily="@font/raleway_medium"
+    android:paddingRight="40dp"
+    android:paddingEnd="40dp"
+    android:paddingLeft="40dp"
+    android:paddingStart="40dp"
     android:textSize="25dp"
-    xmlns:android="http://schemas.android.com/apk/res/android" />
+    xmlns:android="http://schemas.android.com/apk/res/android"/>
