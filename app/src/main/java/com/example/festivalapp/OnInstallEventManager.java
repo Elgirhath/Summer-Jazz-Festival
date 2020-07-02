@@ -25,7 +25,7 @@ public class OnInstallEventManager {
     public void installDatabase(DBmanager dbManager) {
         dbManager.initialize();
         try {
-            ConcertEntity[] concertEntities = new ScheduleReader().read(App.getContext().getAssets().open("concerts.csv"));
+            ConcertEntity[] concertEntities = new ScheduleReader().read(App.getContext().getAssets().open("concerts1.csv"));
             for (ConcertEntity concertEntity : concertEntities) {
                 dbManager.insert(concertEntity);
             }
