@@ -47,7 +47,7 @@ public class MapFragment extends Fragment {
     private MapView mapView;
     private Spinner spinner;
     private MapboxMap map;
-    private Button btn;
+    private View btn;
     LocationRepository repository;
     private Location currentLocation;
 
@@ -77,7 +77,7 @@ public class MapFragment extends Fragment {
                     public void onCameraMove() {
                         PointF screenPoint = map.getProjection().toScreenLocation(currentLocation.coordinates);
                         btn.setTranslationX(screenPoint.x - btn.getWidth()/2);
-                        btn.setTranslationY(screenPoint.y + 2 * btn.getHeight());
+                        btn.setTranslationY(screenPoint.y + 2.2f * btn.getHeight());
                     }
                 });
 
@@ -132,11 +132,23 @@ public class MapFragment extends Fragment {
 
         style.addSource(new GeoJsonSource("source-id"));
 
-        style.addLayer(new SymbolLayer("layer-id", "source-id")
+        style.addLayer(new SymbolLayer("marker-layer", "source-id")
                 .withProperties(
                         PropertyFactory.iconImage("marker_icon"),
                         PropertyFactory.iconOffset(new Float[]{0f, -100f}),
                         PropertyFactory.iconSize(0.2f),
+                        PropertyFactory.iconIgnorePlacement(true),
+                        PropertyFactory.iconAllowOverlap(true)
+                ));
+
+        style.addImage(("navigate-button"), BitmapFactory.decodeResource(
+                getResources(), R.drawable.navigate_button));
+
+        style.addLayer(new SymbolLayer("navigate-button-layer", "source-id")
+                .withProperties(
+                        PropertyFactory.iconImage("navigate-button"),
+                        PropertyFactory.iconTranslate(new Float[]{0f, 100f}),
+                        PropertyFactory.iconSize(0.8f),
                         PropertyFactory.iconIgnorePlacement(true),
                         PropertyFactory.iconAllowOverlap(true)
                 ));

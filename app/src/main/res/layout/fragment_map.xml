@@ -12,23 +12,12 @@
         android:layout_marginTop="60dp"
         app:mapbox_cameraZoom="15"/>
 
-    <Button
+    <View
         android:id="@+id/buttonik"
-        android:layout_width="wrap_content"
-        android:paddingHorizontal="70dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:layout_width="210dp"
+        android:layout_height="60dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="Nawiguj"
-        android:background="@layout/navbutton"
-        android:textColor="#FFFFFF"
-        android:layout_marginBottom="100dp"
-        android:bottomRightRadius="25dp"
-        android:bottomLeftRadius="25dp"
-        android:topLeftRadius="25dp"
-        android:topRightRadius="25dp"
-        android:fontFamily="@font/raleway_medium"/>
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <RelativeLayout
         android:layout_width="wrap_content"
