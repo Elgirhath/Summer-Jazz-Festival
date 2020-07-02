@@ -81,8 +81,8 @@ public class MapFragment extends Fragment {
                                                        final int position, long id) {
                                 Object item = adapterView.getItemAtPosition(position);
                                 if (item != null) {
-                                    Toast.makeText(getContext(), item.toString(),
-                                            Toast.LENGTH_SHORT).show();
+                                    /*Toast.makeText(getContext(), item.toString(),
+                                            Toast.LENGTH_SHORT).show();*/
 
                                     btn.setOnClickListener(new View.OnClickListener() {
                                         public void onClick(View v)
