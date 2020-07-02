@@ -96,6 +96,7 @@ public class MapFragment extends Fragment {
                                 }
 
 
+
                                 update_marker(repository.getLocationList().get(position).coordinates);
 
                             }
@@ -122,6 +123,8 @@ public class MapFragment extends Fragment {
         style.addLayer(new SymbolLayer("layer-id", "source-id")
                 .withProperties(
                         PropertyFactory.iconImage("marker_icon"),
+                        PropertyFactory.iconOffset(new Float[]{0f, -100f}),
+                        PropertyFactory.iconSize(0.2f),
                         PropertyFactory.iconIgnorePlacement(true),
                         PropertyFactory.iconAllowOverlap(true)
                 ));

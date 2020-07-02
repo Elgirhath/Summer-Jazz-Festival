@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <style name="Spinner">
-        <item name="android:textColor">@color/textPrimary</item>
-        <item name="android:fontFamily">@font/raleway_medium</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textAlignment">center</item>
-
-    </style>
-
     <style name="spinnerDropDownItemStyle">
         <item name="android:textColor">@color/textPrimary</item>
         <item name="android:fontFamily">@font/raleway_medium</item>
