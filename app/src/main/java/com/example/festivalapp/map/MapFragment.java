@@ -147,8 +147,7 @@ public class MapFragment extends Fragment {
         style.addLayer(new SymbolLayer("navigate-button-layer", "source-id")
                 .withProperties(
                         PropertyFactory.iconImage("navigate-button"),
-                        PropertyFactory.iconOffset(new Float[]{0f, 100f}),
-//                        PropertyFactory.iconTranslate(new Float[]{0f, 100f}),
+                        PropertyFactory.iconOffset(new Float[]{0f, 200f}),
                         PropertyFactory.iconSize(0.8f),
                         PropertyFactory.iconIgnorePlacement(true),
                         PropertyFactory.iconAllowOverlap(true)
