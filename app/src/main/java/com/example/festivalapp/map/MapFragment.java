@@ -1,13 +1,11 @@
 package com.example.festivalapp.map;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.PointF;
-import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,13 +32,7 @@ import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.Spinner;
-import android.widget.Toast;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class MapFragment extends Fragment {
 
@@ -50,6 +42,9 @@ public class MapFragment extends Fragment {
     private View btn;
     LocationRepository repository;
     private Location currentLocation;
+
+    private int buttonVerticalOffsetDp = 200;
+    private float buttonScale = 0.8f;
 
     public MapFragment(){
         repository = new LocationRepository();
@@ -77,7 +72,9 @@ public class MapFragment extends Fragment {
                     public void onCameraMove() {
                         PointF screenPoint = map.getProjection().toScreenLocation(currentLocation.coordinates);
                         btn.setTranslationX(screenPoint.x - btn.getWidth()/2);
-                        btn.setTranslationY(screenPoint.y + 2.2f * btn.getHeight());
+                        float buttonAbsoluteOffsetDp = buttonVerticalOffsetDp * buttonScale;
+                        float buttonAbsoluteOffsetPx = buttonAbsoluteOffsetDp * Resources.getSystem().getDisplayMetrics().density;
+                        btn.setTranslationY(screenPoint.y + btn.getHeight()/2f + buttonAbsoluteOffsetPx);
                     }
                 });
 
@@ -147,8 +144,8 @@ public class MapFragment extends Fragment {
         style.addLayer(new SymbolLayer("navigate-button-layer", "source-id")
                 .withProperties(
                         PropertyFactory.iconImage("navigate-button"),
-                        PropertyFactory.iconOffset(new Float[]{0f, 200f}),
-                        PropertyFactory.iconSize(0.8f),
+                        PropertyFactory.iconOffset(new Float[]{0f, (float) buttonVerticalOffsetDp}),
+                        PropertyFactory.iconSize(buttonScale),
                         PropertyFactory.iconIgnorePlacement(true),
                         PropertyFactory.iconAllowOverlap(true)
                 ));
