@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_splash_screen"
-    tools:context=".SplashScreen"
+    tools:context="ag.example1.festivalapp.SplashScreen"
     android:padding="45dp">
 
     <TextView
