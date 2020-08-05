@@ -9,5 +9,5 @@ This application is an official app for Summer Jazz Festival in Kraków. You wil
 </br>
 <p align="center">
     Download the app!</br>
-    <img src = "https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" width ="25%" center/>
+    <a href="https://play.google.com/store/apps/details?id=ag.example1.festivalapp"><img src = "https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" width ="25%"/></a>
 </p>
