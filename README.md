@@ -4,7 +4,7 @@ This application is an official app for Summer Jazz Festival in Kraków. You wil
 
 <img src = "https://i.ibb.co/xYD5bts/image.png" width ="25%" /><img src = "https://i.ibb.co/PskYKG9/image.png" width ="25%" /><img src = "https://i.ibb.co/FVrWTGq/image.png" width ="25%" /><img src = "https://i.ibb.co/Y0Q2MwL/mBLDALb.png" width ="25%" />
 
-## Checkout the festival's website: https://www.cracjazz.com/pl/
+## Checkout the festival's website: https://www.cracjazz.com/en/
 
 </br>
 <p align="center">
